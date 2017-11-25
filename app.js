@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser');
 const request = require('request');
+const constants = require('constants');
 const app = express()
 
 const clientId = process.env.CLIENT_ID;
@@ -109,7 +110,7 @@ function acquireToken(req, next) {
     headers,
     form,
     json: true,
-    secureProtocol: 'TLSv1_2_method'
+    secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_TLSv1
   }, (err, httpResponse, body) => {
     next(err, body);
   });
@@ -127,7 +128,7 @@ function fetchAccounts(accessToken, next) {
     url,
     headers,
     json: true,
-    secureProtocol: 'TLSv1_2_method'
+    secureOptions: constants.SSL_OP_NO_SSLv3 | constants.SSL_OP_NO_TLSv1
   }, (err, httpResponse, body) => {
     next(err, body);
   });
