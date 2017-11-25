@@ -82,6 +82,17 @@ app.get('/accounts', (req, res) => {
   });
 });
 
+app.get('/balance', (req, res) => {
+  const balance = latestAccounts
+    .map(account => account.availableBalance)
+    .reduce((sum, a) => parseFloat(sum) + parseFloat(a), 0.0)
+    .toFixed(2);
+  console.log('GET balance', balance);
+  res.json({
+    balance
+  });
+});
+
 app.listen(port, () => console.log('App listening on port', port))
 
 function getAuthUrl(req) {
