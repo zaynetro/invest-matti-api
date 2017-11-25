@@ -5,6 +5,7 @@ const app = express()
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
+const port = process.env.PORT || 3000;
 const baseUrl = 'https://api.hackathon.developer.nordeaopenbanking.com';
 const dashboardUrl = 'https://invest-matti.shinyapps.io/invest-matti/';
 
@@ -79,7 +80,7 @@ app.get('/accounts', (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(port, () => console.log('App listening on port', port))
 
 function getAuthUrl(req) {
   const redirectUrl = getRedirectUrl(req);
