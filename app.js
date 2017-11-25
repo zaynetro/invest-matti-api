@@ -109,7 +109,7 @@ function acquireToken(req, next) {
     headers,
     form,
     json: true,
-    secureProtocol: 'TLSv1_2'
+    secureProtocol: 'TLSv1_2_method'
   }, (err, httpResponse, body) => {
     next(err, body);
   });
@@ -127,7 +127,7 @@ function fetchAccounts(accessToken, next) {
     url,
     headers,
     json: true,
-    secureProtocol: 'TLSv1_2'
+    secureProtocol: 'TLSv1_2_method'
   }, (err, httpResponse, body) => {
     next(err, body);
   });
