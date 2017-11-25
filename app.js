@@ -6,6 +6,7 @@ const app = express()
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const port = process.env.PORT || 3000;
+const isProd = process.env.NODE_ENV == 'production';
 const baseUrl = 'https://api.hackathon.developer.nordeaopenbanking.com';
 const dashboardUrl = 'https://invest-matti.shinyapps.io/invest-matti/';
 
@@ -88,8 +89,8 @@ function getAuthUrl(req) {
 }
 
 function getRedirectUrl(req) {
-  //return encodeURIComponent(req.protocol + '://' + req.get('host') + '/callback');
-  return req.protocol + '://' + req.get('host') + '/callback';
+  const protocol = isProd ? 'https' : req.protocol;
+  return protocol + '://' + req.get('host') + '/callback';
 }
 
 function acquireToken(req, next) {
